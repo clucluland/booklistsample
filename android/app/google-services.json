@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "585292034067",
+    "project_id": "book-list-sample-db424",
+    "storage_bucket": "book-list-sample-db424.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585292034067:android:67100c8fd7cf6748ab4fe6",
+        "android_client_info": {
+          "package_name": "com.example.booklistsample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "585292034067-7scj1nbr3odknfrqmao3ats9dn3i1ah7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkade07RKjvnCMZesAGYVfLm9oGPzkWeg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585292034067-7scj1nbr3odknfrqmao3ats9dn3i1ah7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "585292034067-e4m84qlc03ilih0oeuml25l35a7qovbk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.booklistsample"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
