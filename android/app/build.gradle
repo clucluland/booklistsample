@@ -47,7 +47,6 @@ android {
         applicationId "com.example.booklistsample"
         minSdkVersion 23
         targetSdkVersion 30
-        multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
