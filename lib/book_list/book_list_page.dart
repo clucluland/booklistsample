@@ -36,19 +36,31 @@ class BookListPage extends StatelessWidget {
             );
           }),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // ここにボタンを押した時に呼ばれるコードを書く
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => AddBookPage(),
-                  fullscreenDialog: true,
-              ),
+        floatingActionButton: Consumer<BookListModel>(builder: (context, model, child) {
+            return FloatingActionButton(
+              onPressed: () async {
+                // ここにボタンを押した時に呼ばれるコードを書く
+                final bool? added = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddBookPage(),
+                      fullscreenDialog: true,
+                  ),
+                );
+
+                if (added != null && added) {
+                  const snackBar = SnackBar(
+                    backgroundColor: Colors.green,
+                    content: Text('本を追加しました。'),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+                model.fetchBookList();
+              },
+              tooltip: 'Increment',
+              child: Icon(Icons.add),
             );
-          },
-          tooltip: 'Increment',
-          child: Icon(Icons.add),
+          }
         ),
       ),
     );

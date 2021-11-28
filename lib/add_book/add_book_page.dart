@@ -48,11 +48,12 @@ class AddBookPage extends StatelessWidget {
                   // 追加の処理
                   try {
                     await model.addBook();
-                    const snackBar = SnackBar(
-                      backgroundColor: Colors.green,
-                      content: Text('成功'),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    Navigator.of(context).pop(true);
+                    // const snackBar = SnackBar(
+                    //   backgroundColor: Colors.green,
+                    //   content: Text('成功'),
+                    // );
+                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   } catch (e) {
                     final snackBar = SnackBar(
                       backgroundColor: Colors.orange,
