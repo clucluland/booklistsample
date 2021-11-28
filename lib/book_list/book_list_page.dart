@@ -1,3 +1,5 @@
+import 'package:booklistsample/add_book/add_book_model.dart';
+import 'package:booklistsample/add_book/add_book_page.dart';
 import 'package:booklistsample/book_list/book_list_model.dart';
 import 'package:booklistsample/domain/book.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +36,14 @@ class BookListPage extends StatelessWidget {
             );
           }),
         ),
-        floatingActionButton: const FloatingActionButton(
-          onPressed: null,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // ここにボタンを押した時に呼ばれるコードを書く
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddBookPage()),
+            );
+          },
           tooltip: 'Increment',
           child: Icon(Icons.add),
         ),
