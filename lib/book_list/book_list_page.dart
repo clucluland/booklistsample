@@ -41,7 +41,10 @@ class BookListPage extends StatelessWidget {
             // ここにボタンを押した時に呼ばれるコードを書く
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AddBookPage()),
+              MaterialPageRoute(
+                  builder: (context) => AddBookPage(),
+                  fullscreenDialog: true,
+              ),
             );
           },
           tooltip: 'Increment',
