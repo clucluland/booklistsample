@@ -56,6 +56,33 @@ class BookListPage extends StatelessWidget {
                         ),
                       ],
                     ),
+                    // The end action pane is the one at the right or the bottom side.
+                    endActionPane: const ActionPane(
+                      motion: ScrollMotion(),
+                      children: [
+                        SlidableAction(
+                          // An action can be bigger than the others.
+                          flex: 2,
+                          onPressed: null,
+                          backgroundColor: Color(0xFF7BC043),
+                          foregroundColor: Colors.white,
+                          icon: Icons.archive,
+                          label: 'Archive',
+                        ),
+                        SlidableAction(
+                          onPressed: null,
+                          backgroundColor: Color(0xFF0392CF),
+                          foregroundColor: Colors.white,
+                          icon: Icons.save,
+                          label: 'Save',
+                        ),
+                      ],
+                    ),
+
+                    // The child of the Slidable is what the user sees when the
+                    // component is not dragged.
+                    // child: const ListTile(title: Text('Slide me')),
+
                     child: ListTile(
                       title: Text(book.title),
                       subtitle: Text(book.author),
