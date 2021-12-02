@@ -1,12 +1,11 @@
-import 'package:booklistsample/add_book/add_book_model.dart';
 import 'package:booklistsample/add_book/add_book_page.dart';
 import 'package:booklistsample/book_list/book_list_model.dart';
 import 'package:booklistsample/domain/book.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 
 class BookListPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<BookListModel>(
@@ -25,43 +24,76 @@ class BookListPage extends StatelessWidget {
               return CircularProgressIndicator();
             }
             // ここより下は books は絶対 null でない
-            final List<Widget> widgets = books.map(
-                    (book) => ListTile(
+            final List<Widget> widgets = books
+                .map(
+                  (book) => Slidable(
+                    key: const ValueKey(0),
+
+                    // The start action pane is the one at the left or the top side.
+                    startActionPane: ActionPane(
+                      // A motion is a widget used to control how the pane animates.
+                      motion: const ScrollMotion(),
+
+                      // A pane can dismiss the Slidable.
+                      dismissible: DismissiblePane(onDismissed: () {}),
+
+                      // All actions are defined in the children parameter.
+                      children: const [
+                        // A SlidableAction can have an icon and/or a label.
+                        SlidableAction(
+                          onPressed: null,
+                          backgroundColor: Color(0xFFFE4A49),
+                          foregroundColor: Colors.white,
+                          icon: Icons.delete,
+                          label: 'Delete',
+                        ),
+                        SlidableAction(
+                          onPressed: null,
+                          backgroundColor: Color(0xFF21B7CA),
+                          foregroundColor: Colors.white,
+                          icon: Icons.share,
+                          label: 'Share',
+                        ),
+                      ],
+                    ),
+                    child: ListTile(
                       title: Text(book.title),
                       subtitle: Text(book.author),
                     ),
-                  ).toList();
+                  ),
+                )
+                .toList();
             return ListView(
               children: widgets,
             );
           }),
         ),
-        floatingActionButton: Consumer<BookListModel>(builder: (context, model, child) {
-            return FloatingActionButton(
-              onPressed: () async {
-                // ここにボタンを押した時に呼ばれるコードを書く
-                final bool? added = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => AddBookPage(),
-                      fullscreenDialog: true,
-                  ),
-                );
+        floatingActionButton:
+            Consumer<BookListModel>(builder: (context, model, child) {
+          return FloatingActionButton(
+            onPressed: () async {
+              // ここにボタンを押した時に呼ばれるコードを書く
+              final bool? added = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddBookPage(),
+                  fullscreenDialog: true,
+                ),
+              );
 
-                if (added != null && added) {
-                  const snackBar = SnackBar(
-                    backgroundColor: Colors.green,
-                    content: Text('本を追加しました。'),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
-                model.fetchBookList();
-              },
-              tooltip: 'Increment',
-              child: Icon(Icons.add),
-            );
-          }
-        ),
+              if (added != null && added) {
+                const snackBar = SnackBar(
+                  backgroundColor: Colors.green,
+                  content: Text('本を追加しました。'),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+              model.fetchBookList();
+            },
+            tooltip: 'Increment',
+            child: Icon(Icons.add),
+          );
+        }),
       ),
     );
   }
