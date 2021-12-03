@@ -62,19 +62,19 @@ class BookListPage extends StatelessWidget {
                       children: [
                         SlidableAction(
                           // An action can be bigger than the others.
-                          flex: 2,
+                          // flex: 2,
                           onPressed: null,
-                          backgroundColor: Color(0xFF7BC043),
+                          backgroundColor: Colors.lightBlue,
                           foregroundColor: Colors.white,
-                          icon: Icons.archive,
-                          label: 'Archive',
+                          icon: Icons.edit,
+                          label: '編集',
                         ),
                         SlidableAction(
                           onPressed: null,
-                          backgroundColor: Color(0xFF0392CF),
+                          backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
-                          icon: Icons.save,
-                          label: 'Save',
+                          icon: Icons.delete,
+                          label: '削除',
                         ),
                       ],
                     ),
