@@ -22,13 +22,13 @@ class BookListPage extends StatelessWidget {
             if (books == null) {
               // booksがnullのときぐるぐる待ち
               // book_list_model の fetchBookList() で値が取れるまで null
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             }
             // ここより下は books は絶対 null でない
             final List<Widget> widgets = books
                 .map(
                   (book) => Slidable(
-                    key: const ValueKey(0),
+                    // key: const ValueKey(0),
 
                     // // The start action pane is the one at the left or the top side.
                     // startActionPane: ActionPane(
