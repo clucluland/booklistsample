@@ -1,12 +1,16 @@
+import 'package:booklistsample/domain/book.dart';
 import 'package:booklistsample/edit_book/edit_book_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EditBookPage extends StatelessWidget {
+  final Book book;
+  EditBookPage(this.book);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<EditBookModel>(
-      create: (_) => EditBookModel(),
+      create: (_) => EditBookModel(book),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('本を編集'),
@@ -18,6 +22,7 @@ class EditBookPage extends StatelessWidget {
               child: Column(
                 children: [
                   TextField(
+                    controller: model.titleController,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: '本のタイトル',

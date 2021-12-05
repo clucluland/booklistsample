@@ -69,7 +69,7 @@ class BookListPage extends StatelessWidget {
                             final bool? added = await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => EditBookPage(),
+                                builder: (context) => EditBookPage(book),
                               ),
                             );
 

@@ -1,7 +1,18 @@
+import 'package:booklistsample/domain/book.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class EditBookModel extends ChangeNotifier {
+  final Book book;
+  EditBookModel(this.book) {
+    titleController.text = book.title;
+    autherController.text = book.author;
+  }
+
+  // 初期値セットのためにコントローラを設置
+  final titleController = TextEditingController();
+  final autherController = TextEditingController();
+
   String? title;
   String? author;
 
