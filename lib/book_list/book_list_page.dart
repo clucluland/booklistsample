@@ -1,6 +1,7 @@
 import 'package:booklistsample/add_book/add_book_page.dart';
 import 'package:booklistsample/book_list/book_list_model.dart';
 import 'package:booklistsample/domain/book.dart';
+import 'package:booklistsample/edit_book/edit_book_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
@@ -57,19 +58,38 @@ class BookListPage extends StatelessWidget {
                     //   ],
                     // ),
                     // The end action pane is the one at the right or the bottom side.
-                    endActionPane: const ActionPane(
+                    endActionPane: ActionPane(
                       motion: ScrollMotion(),
                       children: [
                         SlidableAction(
                           // An action can be bigger than the others.
                           // flex: 2,
-                          onPressed: null,
+                          onPressed: (_) async {
+                            // ここにボタンを押した時に呼ばれるコードを書く
+                            final bool? added = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditBookPage(),
+                                fullscreenDialog: true,
+                              ),
+                            );
+
+                            if (added != null && added) {
+                              const snackBar = SnackBar(
+                                backgroundColor: Colors.green,
+                                content: Text('本を編集しました。'),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
+                            model.fetchBookList();
+                          },
                           backgroundColor: Colors.lightBlue,
                           foregroundColor: Colors.white,
                           icon: Icons.edit,
                           label: '編集',
                         ),
-                        SlidableAction(
+                        const SlidableAction(
                           onPressed: null,
                           backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
