@@ -16,6 +16,10 @@ class EditBookModel extends ChangeNotifier {
   String? title;
   String? author;
 
+  bool isUpdated() {
+    return title != null && author != null;
+  }
+
   // void → Future に変更
   Future addBook() async {
     if (title == null || title == '') {
