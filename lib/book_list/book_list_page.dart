@@ -70,7 +70,6 @@ class BookListPage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => EditBookPage(),
-                                fullscreenDialog: true,
                               ),
                             );
 
