@@ -5,20 +5,20 @@ import 'package:flutter/cupertino.dart';
 class BookListModel extends ChangeNotifier {
   List<Book>? books; // Null許容
 
-  void fetchBookList() async{
+  void fetchBookList() async {
     final QuerySnapshot snapshot =
-      await FirebaseFirestore.instance.collection('books').get();
+        await FirebaseFirestore.instance.collection('books').get();
 
     final List<Book> books = snapshot.docs.map((DocumentSnapshot document) {
       Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+      final String id = document.id;
       final String title = data['title'];
       final String author = data['author'];
 
-      return Book(title, author);
+      return Book(id, title, author);
     }).toList();
 
     this.books = books;
-    notifyListeners();  // 呼び元で発火
+    notifyListeners(); // 呼び元で発火
   }
-
 }
