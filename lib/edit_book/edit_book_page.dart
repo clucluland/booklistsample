@@ -54,13 +54,8 @@ class EditBookPage extends StatelessWidget {
                         ? () async {
                             // 更新の処理
                             try {
-                              await model.addBook();
+                              await model.update();
                               Navigator.of(context).pop(true);
-                              // const snackBar = SnackBar(
-                              //   backgroundColor: Colors.green,
-                              //   content: Text('成功'),
-                              // );
-                              // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             } catch (e) {
                               final snackBar = SnackBar(
                                 backgroundColor: Colors.orange,

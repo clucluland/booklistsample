@@ -32,7 +32,7 @@ class EditBookModel extends ChangeNotifier {
   }
 
   // void → Future に変更
-  Future addBook() async {
+  Future update() async {
     // Firestore に登録
     await FirebaseFirestore.instance.collection('books').doc(book.id).update(
       {
