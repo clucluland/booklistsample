@@ -28,45 +28,49 @@ class EditBookPage extends StatelessWidget {
                       hintText: '本のタイトル',
                     ),
                     onChanged: (text) {
-                      // TODO: ここで取得したtextを使う
-                      model.title = text;
+                      // model.title = text;
+                      model.setTitle(text);
                     },
                   ),
                   const SizedBox(
                     height: 16,
                   ),
                   TextField(
+                    controller: model.autherController,
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: '本の著者',
                     ),
                     onChanged: (text) {
-                      // TODO: ここで取得したtextを使う
-                      model.author = text;
+                      // model.author = text;
+                      model.setAuthor(text);
                     },
                   ),
                   const SizedBox(
                     height: 8,
                   ),
                   ElevatedButton(
-                    onPressed: () async {
-                      // 追加の処理
-                      try {
-                        await model.addBook();
-                        Navigator.of(context).pop(true);
-                        // const snackBar = SnackBar(
-                        //   backgroundColor: Colors.green,
-                        //   content: Text('成功'),
-                        // );
-                        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      } catch (e) {
-                        final snackBar = SnackBar(
-                          backgroundColor: Colors.orange,
-                          content: Text(e.toString()),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                    },
+                    onPressed: model.isUpdated()
+                        ? () async {
+                            // 更新の処理
+                            try {
+                              await model.addBook();
+                              Navigator.of(context).pop(true);
+                              // const snackBar = SnackBar(
+                              //   backgroundColor: Colors.green,
+                              //   content: Text('成功'),
+                              // );
+                              // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            } catch (e) {
+                              final snackBar = SnackBar(
+                                backgroundColor: Colors.orange,
+                                content: Text(e.toString()),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
+                          }
+                        : null,
                     child: const Text('更新する'),
                   ),
                 ],

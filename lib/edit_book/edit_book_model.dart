@@ -16,8 +16,19 @@ class EditBookModel extends ChangeNotifier {
   String? title;
   String? author;
 
+  // notifyListeners()メソッドを使うと状態の変化を通知することができる
+  void setTitle(String title) {
+    this.title = title;
+    notifyListeners();
+  }
+
+  void setAuthor(String author) {
+    this.author = author;
+    notifyListeners();
+  }
+
   bool isUpdated() {
-    return title != null && author != null;
+    return title != null || author != null;
   }
 
   // void → Future に変更
