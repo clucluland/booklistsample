@@ -66,17 +66,17 @@ class BookListPage extends StatelessWidget {
                           // flex: 2,
                           onPressed: (_) async {
                             // ここにボタンを押した時に呼ばれるコードを書く
-                            final bool? updated = await Navigator.push(
+                            final String? title = await Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => EditBookPage(book),
                               ),
                             );
 
-                            if (updated != null && updated) {
-                              const snackBar = SnackBar(
+                            if (title != null) {
+                              final snackBar = SnackBar(
                                 backgroundColor: Colors.green,
-                                content: Text('本を編集しました。'),
+                                content: Text('"$title"を編集しました。'),
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
