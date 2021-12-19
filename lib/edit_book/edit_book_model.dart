@@ -33,6 +33,12 @@ class EditBookModel extends ChangeNotifier {
 
   // void → Future に変更
   Future update() async {
+    // 更新時、入力内容を this にセット
+    // TextBoxの更新がなければ set*()メソッドが走らないため、
+    // 更新しなかった値は null になる。
+    title = titleController.text;
+    author = autherController.text;
+
     // Firestore に登録
     await FirebaseFirestore.instance.collection('books').doc(book.id).update(
       {
