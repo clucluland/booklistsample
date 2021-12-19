@@ -66,17 +66,17 @@ class BookListPage extends StatelessWidget {
                           // flex: 2,
                           onPressed: (_) async {
                             // ここにボタンを押した時に呼ばれるコードを書く
-                            final String? title = await Navigator.push(
+                            final String? updateTitle = await Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => EditBookPage(book),
                               ),
                             );
 
-                            if (title != null) {
+                            if (updateTitle != null) {
                               final snackBar = SnackBar(
                                 backgroundColor: Colors.green,
-                                content: Text('"$title"を編集しました。'),
+                                content: Text('"$updateTitle"を編集しました。'),
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
@@ -119,7 +119,7 @@ class BookListPage extends StatelessWidget {
           return FloatingActionButton(
             onPressed: () async {
               // ここにボタンを押した時に呼ばれるコードを書く
-              final bool? added = await Navigator.push(
+              final String? addTitle = await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => AddBookPage(),
@@ -127,10 +127,10 @@ class BookListPage extends StatelessWidget {
                 ),
               );
 
-              if (added != null && added) {
-                const snackBar = SnackBar(
+              if (addTitle != null) {
+                final snackBar = SnackBar(
                   backgroundColor: Colors.green,
-                  content: Text('本を追加しました。'),
+                  content: Text('"$addTitle"を追加しました。'),
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               }

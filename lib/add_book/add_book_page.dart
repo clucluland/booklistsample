@@ -26,7 +26,7 @@ class AddBookPage extends StatelessWidget {
                       // TODO: ここで取得したtextを使う
                       model.title = text;
                     },
-                ),
+                  ),
                   const SizedBox(
                     height: 16,
                   ),
@@ -43,28 +43,29 @@ class AddBookPage extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                ElevatedButton(
-                  onPressed: () async {
-                  // 追加の処理
-                  try {
-                    await model.addBook();
-                    Navigator.of(context).pop(true);
-                    // const snackBar = SnackBar(
-                    //   backgroundColor: Colors.green,
-                    //   content: Text('成功'),
-                    // );
-                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  } catch (e) {
-                    final snackBar = SnackBar(
-                      backgroundColor: Colors.orange,
-                      content: Text(e.toString()),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  }
-                },
-                child: const Text('追加する'),
-                ),
-              ],),
+                  ElevatedButton(
+                    onPressed: () async {
+                      // 追加の処理
+                      try {
+                        await model.addBook();
+                        Navigator.of(context).pop(model.title);
+                        // const snackBar = SnackBar(
+                        //   backgroundColor: Colors.green,
+                        //   content: Text('成功'),
+                        // );
+                        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      } catch (e) {
+                        final snackBar = SnackBar(
+                          backgroundColor: Colors.orange,
+                          content: Text(e.toString()),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    },
+                    child: const Text('追加する'),
+                  ),
+                ],
+              ),
             );
           }),
         ),
