@@ -35,7 +35,7 @@ class BookListPage extends StatelessWidget {
                           // An action can be bigger than the others.
                           // flex: 2,
                           onPressed: (_) async {
-                            // ここにボタンを押した時に呼ばれるコードを書く
+                            // ここに編集ボタンを押した時に呼ばれるコードを書く
                             final String? updateTitle = await Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -58,8 +58,11 @@ class BookListPage extends StatelessWidget {
                           icon: Icons.edit,
                           label: '編集',
                         ),
-                        const SlidableAction(
-                          onPressed: null,
+                        SlidableAction(
+                          onPressed: (_) async {
+                            // ここに削除ボタンを押したときのコードを書く
+                            await showConfirmDialog(context, book);
+                          },
                           backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
                           icon: Icons.delete,
@@ -114,3 +117,25 @@ class BookListPage extends StatelessWidget {
     );
   }
 }
+
+Future showConfirmDialog(BuildContext context, Book book) => showDialog(
+      context: context,
+      barrierDismissible: true, // ダイアログの外側でタップしたらキャンセル扱い
+      builder: (_) {
+        return AlertDialog(
+          title: const Text("削除確認"),
+          content: Text("${book.title}を削除しますか？"),
+          actions: [
+            TextButton(
+              child: const Text("いいえ"),
+              onPressed: () => Navigator.pop(context),
+            ),
+            TextButton(
+              child: const Text("はい"),
+              // ignore: avoid_print
+              onPressed: () => print('OK'),
+            ),
+          ],
+        );
+      },
+    );
