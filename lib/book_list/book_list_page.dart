@@ -61,7 +61,7 @@ class BookListPage extends StatelessWidget {
                         SlidableAction(
                           onPressed: (_) async {
                             // ここに削除ボタンを押したときのコードを書く
-                            await showConfirmDialog(context, book);
+                            await showConfirmDialog(context, book, model);
                           },
                           backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
@@ -118,13 +118,15 @@ class BookListPage extends StatelessWidget {
   }
 }
 
-Future showConfirmDialog(BuildContext context, Book book) => showDialog(
+Future showConfirmDialog(
+        BuildContext context, Book book, BookListModel model) =>
+    showDialog(
       context: context,
       barrierDismissible: true, // ダイアログの外側でタップしたらキャンセル扱い
       builder: (_) {
         return AlertDialog(
           title: const Text("削除確認"),
-          content: Text("${book.title}を削除しますか？"),
+          content: Text("『${book.title}』を削除しますか？"),
           actions: [
             TextButton(
               child: const Text("いいえ"),
@@ -132,8 +134,11 @@ Future showConfirmDialog(BuildContext context, Book book) => showDialog(
             ),
             TextButton(
               child: const Text("はい"),
-              // ignore: avoid_print
-              onPressed: () => print('OK'),
+              // onPressed: () => print('OK'),
+              onPressed: () => async {
+                // model 削除
+                await model.delete(book);
+              },
             ),
           ],
         );
