@@ -119,28 +119,40 @@ class BookListPage extends StatelessWidget {
 }
 
 Future showConfirmDialog(
-        BuildContext context, Book book, BookListModel model) =>
-    showDialog(
-      context: context,
-      barrierDismissible: true, // ダイアログの外側でタップしたらキャンセル扱い
-      builder: (_) {
-        return AlertDialog(
-          title: const Text("削除確認"),
-          content: Text("『${book.title}』を削除しますか？"),
-          actions: [
-            TextButton(
-              child: const Text("いいえ"),
-              onPressed: () => Navigator.pop(context),
-            ),
-            TextButton(
-              child: const Text("はい"),
-              // onPressed: () => print('OK'),
-              onPressed: () => async {
-                // model 削除
-                await model.delete(book);
-              },
-            ),
-          ],
-        );
-      },
-    );
+  BuildContext context,
+  Book book,
+  BookListModel model,
+) {
+  return showDialog(
+    context: context,
+    barrierDismissible: true, // ダイアログの外側でタップしたらキャンセル扱い
+    builder: (_) {
+      return AlertDialog(
+        title: const Text("削除確認"),
+        content: Text("『${book.title}』を削除しますか？"),
+        actions: [
+          TextButton(
+            child: const Text("いいえ"),
+            onPressed: () => Navigator.pop(context),
+          ),
+          TextButton(
+            child: const Text("はい"),
+            // onPressed: () => print('OK'),
+            onPressed: () async {
+              // model 削除
+              await model.delete(book);
+              Navigator.pop(context);
+
+              final snackBar = SnackBar(
+                backgroundColor: Colors.red,
+                content: Text('"${book.title}"を削除しました。'),
+              );
+              model.fetchBookList();
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            },
+          ),
+        ],
+      );
+    },
+  );
+}

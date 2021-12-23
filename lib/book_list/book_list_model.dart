@@ -21,8 +21,14 @@ class BookListModel extends ChangeNotifier {
     this.books = books;
     notifyListeners(); // 呼び元で発火
   }
+
+  // (*1)
+  delete(Book book) {
+    FirebaseFirestore.instance.collection('books').doc(book.id).delete();
+  }
 }
 
-Future delete(Book book) {
-  return FirebaseFirestore.instance.collection('books').doc(book.id).delete();
-}
+// 動画では以下の紹介だったが、これでは認識されなかったので↑(*1)で。
+// Future delete(Book book) {
+//   return FirebaseFirestore.instance.collection('books').doc(book.id).delete();
+// }
