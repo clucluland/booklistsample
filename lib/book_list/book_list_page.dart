@@ -76,6 +76,7 @@ class BookListPage extends StatelessWidget {
                     // child: const ListTile(title: Text('Slide me')),
 
                     child: ListTile(
+                      leading: Text(book.imgURL),
                       title: Text(book.title),
                       subtitle: Text(book.author),
                     ),
