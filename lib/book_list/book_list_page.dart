@@ -76,7 +76,10 @@ class BookListPage extends StatelessWidget {
                     // child: const ListTile(title: Text('Slide me')),
 
                     child: ListTile(
-                      leading: Text(book.imgURL),
+                      // Null でないときのみ表示
+                      leading: book.imgURL != null
+                          ? Image.network(book.imgURL!)
+                          : null,
                       title: Text(book.title),
                       subtitle: Text(book.author),
                     ),
