@@ -17,6 +17,20 @@ class AddBookPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
+                  GestureDetector(
+                    child: SizedBox(
+                      width: 100,
+                      height: 160,
+                      child: model.imageFile != null
+                          ? Image.file(model.imageFile!)
+                          : Container(
+                              color: Colors.grey,
+                            ),
+                    ),
+                    onTap: () async {
+                      await model.pickImage();
+                    },
+                  ),
                   TextField(
                     decoration: const InputDecoration(
                       border: InputBorder.none,
