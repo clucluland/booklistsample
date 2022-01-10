@@ -21,6 +21,11 @@ class AddBookModel extends ChangeNotifier {
       throw '著者が入力されていません。';
     }
 
+    // storageにアップロード
+    if (imageFile != null) {
+      
+    }
+
     // Firestore に登録
     await FirebaseFirestore.instance.collection('books').add(
       {
@@ -38,6 +43,7 @@ class AddBookModel extends ChangeNotifier {
 
     if (pickedFile != null) {
       imageFile = File(pickedFile.path);
+      notifyListeners();
     }
   }
 }
