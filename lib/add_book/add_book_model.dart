@@ -9,8 +9,19 @@ class AddBookModel extends ChangeNotifier {
   String? title;
   String? author;
   File? imageFile;
+  bool isLoading = false;
 
   final picker = ImagePicker();
+
+  void startLoading() {
+    isLoading = true;
+    notifyListeners();
+  }
+
+  void endLoading() {
+    isLoading = false;
+    notifyListeners();
+  }
 
   // void → Future に変更
   Future addBook() async {
