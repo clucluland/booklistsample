@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterModel extends ChangeNotifier {
@@ -28,19 +29,22 @@ class RegisterModel extends ChangeNotifier {
     email = emailController.text;
     password = passwordController.text;
 
-    // firebase auth でユーザ作成
+    if (email != null && password != null) {
+      // firebase auth でユーザ作成
+      // Firebase Authenticationを利用するためのインスタンス
+      final userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email!, password: password!);
+      final user = userCredential.user;
+      if (user != null) {
+        final uid = user.uid;
 
-    // firebase に追加
-
-    // Firestore に登録
-    // await FirebaseFirestore.instance.collection('books').doc(book.id).update(
-    //   {
-    //     'email': email,
-    //     'password': password,
-    //   },
-    // );
-
-    // email = null;
-    // password = null;
+        // Firestore に登録
+        final doc = FirebaseFirestore.instance.collection('users').doc(uid);
+        await doc.set({
+          'uid': uid,
+          'email': email,
+        });
+      }
+    }
   }
 }
