@@ -46,16 +46,20 @@ class RegisterPage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () async {
+                      model.startLoading();
+
                       // 追加の処理
                       try {
                         await model.signUp();
-                        // Navigator.of(context).pop(model.email);
+                        Navigator.of(context).pop();
                       } catch (e) {
                         final snackBar = SnackBar(
                           backgroundColor: Colors.orange,
                           content: Text(e.toString()),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      } finally {
+                        model.endLoading();
                       }
                     },
                     child: const Text('登録する'),
