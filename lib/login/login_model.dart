@@ -7,6 +7,17 @@ class LoginModel extends ChangeNotifier {
 
   String? email;
   String? password;
+  bool isLoading = false;
+
+  void startLoading() {
+    isLoading = true;
+    notifyListeners();
+  }
+
+  void endLoading() {
+    isLoading = false;
+    notifyListeners();
+  }
 
   void setEmail(String email) {
     this.email = email;
@@ -18,7 +29,7 @@ class LoginModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future signUp() async {
+  Future login() async {
     email = emailController.text;
     password = passwordController.text;
 
