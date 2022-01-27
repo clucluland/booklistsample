@@ -54,7 +54,7 @@ class LoginPage extends StatelessWidget {
                           // 追加の処理
                           try {
                             await model.login();
-                            // Navigator.of(context).pop(model.email);
+                            Navigator.of(context).pop();
                           } catch (e) {
                             final snackBar = SnackBar(
                               backgroundColor: Colors.orange,

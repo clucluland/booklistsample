@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginModel extends ChangeNotifier {
@@ -34,5 +35,13 @@ class LoginModel extends ChangeNotifier {
     password = passwordController.text;
 
     // ログイン
+    if (email != null && password != null) {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email!, password: password!);
+
+      // ユーザ情報取得
+      final currentUser = FirebaseAuth.instance.currentUser;
+      final uid = currentUser!.uid;
+    }
   }
 }
